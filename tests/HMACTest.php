@@ -33,8 +33,10 @@ class HMACTest extends TestCase
             "request_payload" => $request_payload,
             "private_key" => $private_key
         ];
+
+        $separator = ":";
        
-        $hmac = HMAC::matchingHmac($tolerance, $signature, $private_key, $separator = ":",  $args);
+        $hmac = HMAC::matchingHmac($tolerance, $signature, $private_key, $separator,  $args);
 
 
         $this->assertTrue($hmac);
