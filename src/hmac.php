@@ -14,7 +14,7 @@ class HMAC
      * @args - Argument or payload that you want to used such as ["email" => "test@mail.com", "time" => "90239303234"]
      * 
      */
-    public function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
+    public static function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
         $time = Carbon::now()->subSeconds($tolerance)->timestamp;
         $payload = "";
         foreach($args as $key => $value){
