@@ -19,12 +19,5 @@
         "src/Devixel/HMAC.php"
       ]
     },
-    "extra": {
-        "laravel": {
-          "providers": [
-            "Devixel\\DevixelServiceProvider"
-          ]
-        }
-      },
-      "minimum-stability": "dev"
+    "minimum-stability": "dev"
   }

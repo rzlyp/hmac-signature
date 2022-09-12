@@ -11,7 +11,7 @@ composer dump-autoload
 
 How to use it?
 
-```
+```php
 use Carbon\Carbon;
 use Devixel\HMAC;
 
@@ -40,6 +40,15 @@ $args = [
 ];
 
 $separator = ":";
+
+/**
+     * @tolerance - Max tolerance for hmac signature
+     * @signature - Signature that sended from the other side
+     * @private_key - Access token that you used to generate the HMAC Encryption
+     * @separator - Separator that you used to create the HMAC payload
+     * @args - Argument or payload that you want to used such as ["email" => "test@mail.com", "time" => "90239303234"]
+     * 
+*/
 
 $hmac_match = HMAC::matchingHmac($tolerance, $signature, $private_key, $separator,  $args);
 
