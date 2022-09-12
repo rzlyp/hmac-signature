@@ -43,8 +43,8 @@ class HMAC
      * @tolerance - Max tolerance for hmac signature
      */
     public static function validSignatureTime($timestamp){
-        $currentTime = \Carbon\Carbon::now()->timestamp;
-        $substractTime = $current_time - $timestamp;
+        $currentTime = Carbon::now()->timestamp;
+        $substractTime = $currentTime - $timestamp;
 
         if($substractTime <= $this->tolerance && $substractTime >= 0){
             return true;

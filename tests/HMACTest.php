@@ -105,8 +105,15 @@ class HMACTest extends TestCase
         $separator = ":";
         $hmac = HMAC::matchingHmac($tolerance, $signature, $private_key, $separator,  $args);
 
-
         $this->assertFalse($hmac);
+    }
 
+    public function testValidSignatureTimeSuccess()
+    {
+        $this->assertTrue(HMAC::validSignatureTime(time()) == true);
+    }
+    public function testValidSignatureTimeFail()
+    {
+        $this->assertTrue(HMAC::validSignatureTime('1662993882') == false);
     }
 }
