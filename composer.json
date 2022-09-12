@@ -13,7 +13,17 @@
     },
     "autoload": {
       "psr-4": {
-        "Devixel\\HMAC\\": "src/"
+        "Devixel\\HMAC\\": "src/Devixel"
+      },
+      "files": [
+        "src/Devixel/HMAC.php"
+      ]
+    },
+    "extra": {
+        "laravel": {
+          "providers": [
+            "Devixel\\DevixelServiceProvider"
+          ]
+        }
       }
-    }
   }

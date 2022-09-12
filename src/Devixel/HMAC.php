@@ -1,5 +1,5 @@
 <?php
-namespace Devixel\HMAC;
+namespace Devixel;
 require 'vendor/autoload.php';
 
 use Carbon\Carbon;
@@ -14,16 +14,22 @@ class HMAC
      * @args - Argument or payload that you want to used such as ["email" => "test@mail.com", "time" => "90239303234"]
      * 
      */
-    public static function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
+    public static function matchingHmac($tolerance, $signature, $private_key, $separator = ":",  $args = []){
+        return self::matching($tolerance, $signature, $private_key, $separator,  $args);
+    }
+    public function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
         $time = Carbon::now()->subSeconds($tolerance)->timestamp;
         $payload = "";
+        $i = 0;
         foreach($args as $key => $value){
-            $payload .= $separator.$value;
+            $payload .= $i == 0?$value:$separator.$value;
+
+            $i++;
         }
         $payload .= $separator.$time;
 
         $sign = hash_hmac('sha256', $payload, $private_key);
-    
+        // return $signature."   ".$payload;
         /**
          * Checking the similarities of the signature based on the max time of the tolerance using resursive function
          */
@@ -33,7 +39,7 @@ class HMAC
                 return false;
             }
             $tolerance -= 1;
-            return $this->matching($tolerance, $signature, $private_key, $payload, $path, $request_method,  $request_payload);
+            return self::matching($tolerance, $signature, $private_key, $separator,  $args);
         }
         return true;
     }

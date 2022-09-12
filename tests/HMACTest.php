@@ -1,9 +1,14 @@
 <?php
+require 'vendor/autoload.php';
+require_once('src/Devixel/HMAC.php');
 
+use PHPUnit\Framework\TestCase;
+use Carbon\Carbon;
 use Devixel\HMAC;
-class HMACTest
+
+class HMACTest extends TestCase
 {
-    public function matchingHMAC(): void
+    public function testHMAC()
     {
         $tolerance = 10;
         $private_key = "LfcTNyO1QhEfuaQrpKm0iCXXs5rEhcOA";
@@ -29,7 +34,7 @@ class HMACTest
             "private_key" => $private_key
         ];
        
-        $hmac = HMAC::matching($tolerance, $signature, $private_key, $separator = ":",  $args = []);
+        $hmac = HMAC::matchingHmac($tolerance, $signature, $private_key, $separator = ":",  $args);
 
 
         $this->assertTrue($hmac);
