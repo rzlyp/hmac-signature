@@ -17,7 +17,7 @@ class HMAC
     public static function matchingHmac($tolerance, $signature, $private_key, $separator = ":",  $args = []){
         return self::matching($tolerance, $signature, $private_key, $separator,  $args);
     }
-    public function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
+    public static function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
         $time = Carbon::now()->timezone('Etc/UTC')->subSeconds($tolerance)->timestamp;
         $payload = "";
         $i = 0;
