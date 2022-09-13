@@ -19,7 +19,7 @@ class HMAC
         return self::matching($tolerance, $signature, $private_key, $separator,  $args);
     }
     public function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
-        $time = Carbon::timezone('Etc/UTC')->now()->subSeconds($tolerance)->timestamp;
+        $time = Carbon::now()->timezone('Etc/UTC')->subSeconds($tolerance)->timestamp;
         $payload = "";
         $i = 0;
         foreach($args as $key => $value){
@@ -44,8 +44,7 @@ class HMAC
         }
         return true;
     }
-    public static function validSignatureTime($timestamp){
-        $tolerance = 10;
+    public static function validSignatureTime($timestamp, $tolerance = 0){
         $currentTime = Carbon::now()->timezone('Etc/UTC')->timestamp;
         $substractTime = $currentTime - $timestamp;
 

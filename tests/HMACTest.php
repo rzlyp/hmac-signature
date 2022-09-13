@@ -13,7 +13,7 @@ class HMACTest extends TestCase
         $tolerance = 10;
         $private_key = "LfcTNyO1QhEfuaQrpKm0iCXXs5rEhcOA";
 
-        $time = Carbon::now()->timestamp;
+        $time = Carbon::now()->timezone('Etc/UTC')->timestamp;
         $url = "login/test";
         $request_payload = [
             "id" => 1,
@@ -47,7 +47,7 @@ class HMACTest extends TestCase
         $tolerance = 10;
         $private_key = "LfcTNyO1QhEfuaQrpKm0iCXXs5rEhcOA";
 
-        $time = Carbon::now()->timestamp;
+        $time = Carbon::now()->timezone('Etc/UTC')->timestamp;
         $url = "login/test";
         $request_payload = [
             "id" => 1,

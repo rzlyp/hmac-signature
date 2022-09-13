@@ -9,7 +9,9 @@ composer require devixel/hmac-security
 composer dump-autoload
 ```
 
-How to use it?
+How to use it? 
+
+Make Sure you're using the Etc/UTC Timezone for signature, so we don't need to think about the Timezone differences of the each client.
 
 ```php
 use Carbon\Carbon;
@@ -18,7 +20,7 @@ use Devixel\HMAC;
 $tolerance = 10;
 $private_key = env("private_key_hmac");
 
-$time = Carbon::now()->timestamp;
+$time = Carbon::now()->timezone('Etc/UTC')->timestamp;
 $url = "login/test";
 $request_payload = [
     "id" => 1,
