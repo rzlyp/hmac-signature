@@ -30,7 +30,6 @@ class HMAC
         $payload .= $separator.$time;
 
         $sign = hash_hmac('sha256', $payload, $private_key);
-        // return $signature."   ".$payload;
         /**
          * Checking the similarities of the signature based on the max time of the tolerance using resursive function
          */
