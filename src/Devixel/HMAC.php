@@ -1,6 +1,5 @@
 <?php
 namespace Devixel;
-require 'vendor/autoload.php';
 
 use Carbon\Carbon;
 
