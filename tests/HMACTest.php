@@ -110,7 +110,8 @@ class HMACTest extends TestCase
 
     public function testValidSignatureTimeSuccess()
     {
-        $this->assertTrue(HMAC::validSignatureTime(time()) == true);
+        $tolerance = 5;
+        $this->assertTrue(HMAC::validSignatureTime(time(), $tolerance) == true);
     }
     public function testValidSignatureTimeFail()
     {

@@ -13,6 +13,9 @@ How to use it?
 
 Make Sure you're using the Etc/UTC Timezone for signature, so we don't need to think about the Timezone differences of the each client.
 
+
+# Matching HMAC Signature
+
 ```php
 use Carbon\Carbon;
 use Devixel\HMAC;
@@ -63,4 +66,16 @@ if($hmac_match){
 
 ```
 
+
+# Time Validate
+
+```php
+use Carbon\Carbon;
+use Devixel\HMAC;
+
+$time = time(); //client request timestamp
+$tolerance = 10; //you can add the tolerance of each request due the latency problem, Default to 0 second
+
+$validate_time = HMAC::validSignatureTime($time, $tolerance);
+```
 
