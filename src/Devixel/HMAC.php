@@ -18,29 +18,40 @@ class HMAC
         return self::matching($tolerance, $signature, $private_key, $separator,  $args);
     }
     public static function matching($tolerance, $signature, $private_key, $separator = ":",  $args = []){
-        $time = Carbon::now()->timezone('Etc/UTC')->subSeconds($tolerance)->timestamp;
-        $payload = "";
-        $i = 0;
-        foreach($args as $key => $value){
-            $payload .= $i == 0?$value:$separator.$value;
+        // $time = Carbon::now()->timezone('Etc/UTC')->subSeconds($tolerance)->timestamp;
+        // $payload = "";
+        // $i = 0;
+        // foreach($args as $key => $value){
+        //     $payload .= $i == 0?$value:$separator.$value;
 
-            $i++;
+        //     $i++;
+        // }
+        // $payload .= $separator.$time;
+
+        // $sign = hash_hmac('sha256', $payload, $private_key);
+        // /**
+        //  * Checking the similarities of the signature based on the max time of the tolerance using resursive function
+        //  */
+
+        // if($sign != $signature){
+        //     if($tolerance == 0){
+        //         return false;
+        //     }
+        //     $tolerance -= 1;
+        //     return self::matching($tolerance, $signature, $private_key, $separator,  $args);
+        // }
+        // return true;
+
+        $time = Carbon::now()->timezone('Etc/UTC')->timestamp;
+        for ($i=0; $i < $tolerance; $i++) { 
+            $args[] = $time - $i;
+            $payload = implode($separator, $args);
+            $sign = hash_hmac('sha256', $payload, $private_key);
+            if ($sign == $signature) 
+                return true;
+            array_pop($args); # remove last array item
         }
-        $payload .= $separator.$time;
-
-        $sign = hash_hmac('sha256', $payload, $private_key);
-        /**
-         * Checking the similarities of the signature based on the max time of the tolerance using resursive function
-         */
-
-        if($sign != $signature){
-            if($tolerance == 0){
-                return false;
-            }
-            $tolerance -= 1;
-            return self::matching($tolerance, $signature, $private_key, $separator,  $args);
-        }
-        return true;
+        return false;
     }
     public static function validSignatureTime($timestamp, $tolerance = 0){
         $currentTime = Carbon::now()->timezone('Etc/UTC')->timestamp;
