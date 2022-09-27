@@ -42,16 +42,6 @@ class HMAC
         }
         return true;
 
-        // $time = Carbon::now()->timezone('Etc/UTC')->timestamp;
-        // for ($i=0; $i < $tolerance; $i++) { 
-        //     $args[] = $time - $i;
-        //     $payload = implode($separator, $args);
-        //     $sign = hash_hmac('sha256', $payload, $private_key);
-        //     if ($sign == $signature) 
-        //         return true;
-        //     array_pop($args); # remove last array item
-        // }
-        // return false;
     }
     public static function validSignatureTime($timestamp, $tolerance = 0){
         $currentTime = Carbon::now()->timezone('Etc/UTC')->timestamp;
